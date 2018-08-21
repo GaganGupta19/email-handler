@@ -10,6 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180821211154) do
+
+  create_table "emails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "body"
+    t.integer "uid"
+    t.string "subject"
+    t.string "from"
+    t.string "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uid"], name: "index_emails_on_uid"
+  end
 
 end
