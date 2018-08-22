@@ -1,0 +1,52 @@
+<%= form_with(model: mail_box, local: true) do |form| %>
+    <% if mail_box.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(mail_box.errors.count, "error") %> prohibited this mail_box from being saved:</h2>
+
+          <ul>
+            <% mail_box.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :smtp_address %>
+      <%= form.text_field :smtp_address, id: :mail_box_smtp_address, required: true, class: 'form-control' %>
+    </div>
+
+    <!--<div class="form-group">-->
+      <!--<%#= form.label :port %>-->
+      <!--<%#= form.text_field :port, id: :mail_box_port, required: true, class: 'form-control'  %>-->
+    <!--</div>-->
+
+    <div class="form-group">
+      <%= form.label :authentication %>
+      <%= form.text_field :authentication, id: :mail_box_authentication, required: true, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :domain %>
+      <%= form.text_field :domain, id: :mail_box_domain, required: true, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :imap_address %>
+      <%= form.text_field :imap_address, id: :mail_box_imap_address, required: true, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.text_field :email, id: :mail_box_email, required: true, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.text_field :password, id: :mail_box_password, required: true, class: 'form-control'  %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Create', class: 'btn btn-primary' %>
+    </div>
+<% end %>

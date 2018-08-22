@@ -1,0 +1,36 @@
+<div class="col-md-12">
+  <%= link_to 'New Mail Box', new_mail_box_path, class: 'btn btn-info' %>
+  <br/>
+  <table class="table mt-20">
+    <thead>
+    <tr>
+      <th scope="col">Smtp address</th>
+      <th scope="col">Authentication</th>
+      <th scope="col">Domain</th>
+      <th scope="col">Imap address</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th colspan="4"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @mail_boxes.each do |mail_box| %>
+        <tr>
+          <td><%= mail_box.smtp_address %></td>
+          <td><%= mail_box.authentication %></td>
+          <td><%= mail_box.domain %></td>
+          <td><%= mail_box.imap_address %></td>
+          <td><%= mail_box.email %></td>
+          <td><%= mail_box.password %></td>
+          <td><%= link_to 'Show', mail_box %></td>
+          <td><%= link_to 'Edit', edit_mail_box_path(mail_box) %></td>
+          <td><%= link_to 'Destroy', mail_box, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+

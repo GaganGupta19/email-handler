@@ -10,7 +10,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Email Panel</a>
+      <a class="navbar-brand" href="<%= emails_path %>">Email Panel</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -18,7 +18,7 @@
         <% if user_signed_in? %>
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="<%= mail_boxes_path %>">Mailboxes <span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <span class="navbar-text" style="float: right">

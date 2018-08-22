@@ -2,13 +2,13 @@ class FetchMail
   require 'net/imap'
   attr_accessor :imap
   PORT_ADDRESS = 993
-  #LOGIN_COMMAND = 'LOGIN'
   MAILBOX = 'INBOX'
 
-  def initialize(email, password, imap_address)
+  def initialize(email, password, imap_address, mail_box_id)
     @email = email
     @password = password
     @imap_address = imap_address
+    @mail_box_id = mail_box_id
   end
 
   def login
@@ -39,7 +39,7 @@ class FetchMail
   end
 
   def fetch_and_store_emails
-    last_email = Email.last
+    last_email = Email.where(mail_box_id: @mail_box_id).last
     ids = (last_email.present? ? fetch_from_last_id(last_email.uid) : fetch_all_ids)
     return true if ids.length == 1 && last_email.present? && last_email.uid == ids[0]
     new_ids = ((ids.length > 1 && last_email.present?) ? ids - [last_email.uid] : ids)
@@ -52,6 +52,7 @@ class FetchMail
                      uid: id,
                      from: data.from[0],
                      received_at: data.date,
+                     mail_box_id: @mail_box_id,
                      status: 'Pending')
       end
     end

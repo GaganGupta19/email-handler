@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822192747) do
+ActiveRecord::Schema.define(version: 20180822221638) do
 
   create_table "email_replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
@@ -46,6 +46,10 @@ ActiveRecord::Schema.define(version: 20180822192747) do
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "smtp_address"
+    t.integer "port"
+    t.string "authentication"
+    t.string "domain"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

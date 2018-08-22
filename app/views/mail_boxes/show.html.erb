@@ -1,0 +1,40 @@
+<div class="offset-md-4 col-md-4">
+  <p>
+    <strong>Smtp address:</strong>
+    <%= @mail_box.smtp_address %>
+  </p>
+
+  <p>
+    <strong>Port:</strong>
+    <%= @mail_box.port %>
+  </p>
+
+  <p>
+    <strong>Authentication:</strong>
+    <%= @mail_box.authentication %>
+  </p>
+
+  <p>
+    <strong>Domain:</strong>
+    <%= @mail_box.domain %>
+  </p>
+
+  <p>
+    <strong>Imap address:</strong>
+    <%= @mail_box.imap_address %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @mail_box.email %>
+  </p>
+
+  <p>
+    <strong>Password:</strong>
+    <%= @mail_box.password %>
+  </p>
+
+  <%= link_to 'Edit', edit_mail_box_path(@mail_box) %> |
+  <%= link_to 'Back', mail_boxes_path %>
+
+</div>

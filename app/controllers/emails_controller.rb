@@ -1,17 +1,16 @@
 class EmailsController < ApplicationController
   before_action :set_imap, only: [:index]
-  after_action :destroy_imap, only: [:index]
   before_action :get_email, only: [:show, :get_employees, :update]
   require 'fetch_mail'
 
   def index
-    if @mail.login
-      @mail.fetch_and_store_emails
-      if current_user.has_role? :admin
-        @emails = Email.all.order(received_at: :desc).preload(:roles)
-      else
-        @emails = Email.with_role(:employee, current_user).preload(:roles)
-      end
+    if current_user.has_role? :admin
+      @emails = Email.all.order(received_at: :desc).preload(:roles)
+    else
+      @emails = Email.with_role(:employee, current_user).preload(:roles)
+    end
+    if @imap.blank?
+      flash[:alert] = "Something went wrong"
     end
   end
 
@@ -32,11 +31,7 @@ class EmailsController < ApplicationController
 
   private
     def set_imap
-      @mail = FetchMail.new('horribledevelopers@gmail.com', '9811096838', 'imap.gmail.com')
-    end
-
-    def destroy_imap
-      @mail.destroy_imap
+      @imap = MailBox.load_and_fetch_mails
     end
 
     def get_email
