@@ -7,7 +7,7 @@ class EmailRepliesController < ApplicationController
 
   def create
     respond_to do |format|
-      #@email.email_replies.create!(email_reply_params)
+      @email.email_replies.create!(email_reply_params)
       format.html { redirect_to emails_path, notice: 'Mail Successfully Sent.' }
     end
   end

@@ -6,11 +6,9 @@ class EmailsController < ApplicationController
   def index
     if current_user.has_role? :admin
       @emails = Email.all.order(received_at: :desc).preload(:roles)
+      flash[:alert] = "Something went wrong" if @imap.blank?
     else
       @emails = Email.with_role(:employee, current_user).preload(:roles)
-    end
-    if @imap.blank?
-      flash[:alert] = "Something went wrong"
     end
   end
 
@@ -31,7 +29,7 @@ class EmailsController < ApplicationController
 
   private
     def set_imap
-      @imap = MailBox.load_and_fetch_mails
+      @imap = MailBox.load_and_fetch_mails if current_user.has_role? :admin
     end
 
     def get_email

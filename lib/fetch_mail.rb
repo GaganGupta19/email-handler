@@ -2,7 +2,7 @@ class FetchMail
   require 'net/imap'
   attr_accessor :imap
   PORT_ADDRESS = 993
-  MAILBOX = 'INBOX'
+  MAILBOX = 'Inbox'
 
   def initialize(email, password, imap_address, mail_box_id)
     @email = email
@@ -67,6 +67,7 @@ class FetchMail
   end
 
   def destroy_imap
+    return if @imap.disconnected?
     @imap.logout
     @imap.disconnect
   end
