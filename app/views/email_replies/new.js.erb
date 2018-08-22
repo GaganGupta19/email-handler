@@ -1,0 +1,5 @@
+$('#reply-details')
+    .empty()
+    .append('<%= j render partial: 'form', locals: { email: @email, email_reply: @email_reply } %>');
+
+$('#reply-modal').modal('show');

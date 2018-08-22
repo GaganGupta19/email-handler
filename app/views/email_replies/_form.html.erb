@@ -1,0 +1,17 @@
+<div class="col-md-12">
+  <p><b>Subject: </b> <%= email.subject %></p>
+  <p><b>To: </b> <%= email.from %></p>
+</div>
+<div class="col-md-12">
+  <%= form_for email_reply, url: email_email_replies_path(email), method: :post do |f| %>
+      <%= f.hidden_field :user_id, current_user.id %>
+      <%= f.hidden_field :to, value: email.from %>
+
+      <div class="form-group">
+        <label for="emailReply">Reply Text</label>
+        <%= f.text_area :body, class: 'form-control', rows: 5, required: true %>
+      </div>
+
+      <%= f.submit 'Reply', class: 'btn btn-success' %>
+  <% end %>
+</div>

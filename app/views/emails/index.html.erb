@@ -1,31 +1,98 @@
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-bordered">
-      <thead>
+<div class="col-md-12">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">uid</th>
+      <th scope="col">Status</th>
+      <th scope="col">From</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Body</th>
+      <th scope="col">Assigned to</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @emails.each do |e| %>
         <tr>
-          <th>id</th>
-          <th>uid</th>
-          <th>From</th>
-          <th>Subject</th>
-          <th>Body</th>
-          <th>message_id</th>
-          <th>Actions</th>
+          <th scope="row"><%= e.id %></th>
+          <td><%= e.uid %></td>
+          <td>
+            <% status_class = e.status.eql?('Pending') ? 'badge badge-primary' : 'badge badge-success' %>
+            <span class="<%= status_class %>">
+              <%= e.status %>
+            </span>
+          </td>
+          <td><%= e.from %></td>
+          <td><%= e.subject %></td>
+          <td><%= truncate(e.body, length: 50) %></td>
+          <td><%= e.try(:user).try(:email) %></td>
+          <td>
+            <%= link_to 'Open Mail', email_path(e), remote: true, class: 'btn btn-primary' %>
+            <%= link_to 'Reply', new_email_email_reply_path(e), class: 'btn btn-secondary', remote: true %>
+            <% if current_user.has_role? :admin %>
+                <%= link_to 'Assign Employee', get_employees_email_path(e), class: 'btn btn-info', remote: true %>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @emails.each do |e| %>
-          <tr>
-            <td><%= e.id %></td>
-            <td><%= e.uid %></td>
-            <td><%= e.from %></td>
-            <td><%= e.subject %></td>
-            <td><%= truncate(e.body, length: 100) %></td>
-            <td><%= e.message_id %></td>
-            <td><%= e.message_id %></td>
-            <td></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="email-modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="email-details">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="reply-modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reply to Email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="reply-details">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="assign-modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign an Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="employee-assignment">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

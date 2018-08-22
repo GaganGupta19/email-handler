@@ -1,0 +1,10 @@
+<div class="col-md-12">
+  <%= form_for email, method: :put do |f| %>
+      <div class="form-group">
+        <label for="employee selection">Select Employee</label>
+        <%= f.collection_select :user_id, employees, :id, :email %>
+      </div>
+
+      <%= f.submit 'Select', class: 'btn btn-success' %>
+  <% end %>
+</div>

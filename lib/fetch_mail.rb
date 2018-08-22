@@ -46,7 +46,13 @@ class FetchMail
     new_ids.each do |id|
       data = fetch_data(id)
       if data.present?
-        Email.create(body: data.text_part.body.to_s, subject: data.subject, message_id: data.message_id, uid: id, from: data.from[0])
+        Email.create(body: data.text_part.body.to_s,
+                     subject: data.subject,
+                     message_id: data.message_id,
+                     uid: id,
+                     from: data.from[0],
+                     received_at: data.date,
+                     status: 'Pending')
       end
     end
   end
@@ -59,4 +65,8 @@ class FetchMail
     end
   end
 
+  def destroy_imap
+    @imap.logout
+    @imap.disconnect
+  end
 end

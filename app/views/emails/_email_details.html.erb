@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <p><b>From :</b> <%= email.from %></p>
+  <p><b>Received at :</b><%= email.created_at %></p>
+  <p><b>Subject :</b><%= email.subject %></p>
+  <hr/>
+  <p><b>Body : </b></p>
+  <p><%= email.body.html_safe %></p>
+</div>
