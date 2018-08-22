@@ -40,12 +40,13 @@ class FetchMail
 
   def fetch_and_store_emails
     last_email = Email.last
-    ids = (last_email.present? ? fetch_from_last_id(last_email.id) : fetch_all_ids)
-    new_ids = ((ids.length > 1 && last_email.present?) ? ids - [last_email.id] : ids)
+    ids = (last_email.present? ? fetch_from_last_id(last_email.uid) : fetch_all_ids)
+    return true if ids.length == 1 && last_email.present? && last_email.uid == ids[0]
+    new_ids = ((ids.length > 1 && last_email.present?) ? ids - [last_email.uid] : ids)
     new_ids.each do |id|
       data = fetch_data(id)
       if data.present?
-        Email.create(body: data.text_part.body.to_s, subject: data.subject, message_id: data.message_id, uid: id)
+        Email.create(body: data.text_part.body.to_s, subject: data.subject, message_id: data.message_id, uid: id, from: data.from[0])
       end
     end
   end

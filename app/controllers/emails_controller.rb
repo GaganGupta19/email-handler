@@ -3,7 +3,8 @@ class EmailsController < ApplicationController
   require 'fetch_mail'
 
   def index
-    if @mail.login && @mail.fetch_and_store_emails
+    if @mail.login
+      @mail.fetch_and_store_emails
       @emails = Email.all
     end
   end
