@@ -14,11 +14,11 @@ class FetchMail
   def login
     begin
       @imap = Net::IMAP.new(@imap_address, PORT_ADDRESS, true, nil, false)
-      p "-----------------------------------"
-      p "#{@imap.login(@email, @password)} authentication"
+      @imap.login(@email, @password)
       @imap.select(MAILBOX)
       return true
-    rescue
+    rescue e
+      puts "ERROR! #{e}"
       return false
     end
   end
