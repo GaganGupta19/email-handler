@@ -1,0 +1,4 @@
+fetch_emails_job:
+  cron: "10 * * * *"
+  class: "FetchEmailsJob"
+  queue: default

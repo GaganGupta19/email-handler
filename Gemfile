@@ -34,6 +34,11 @@ gem 'jbuilder', '~> 2.5'
 # mail gem
 gem 'mail'
 
+# background jobs
+gem 'sidekiq'
+gem 'rufus-scheduler', '~> 3.4.2'
+gem "sidekiq-cron", "~> 0.6.3"
+
 # handling front-end
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'

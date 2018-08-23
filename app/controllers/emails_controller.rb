@@ -1,12 +1,10 @@
 class EmailsController < ApplicationController
-  before_action :set_imap, only: [:index]
   before_action :get_email, only: [:show, :get_employees, :update]
   require 'fetch_mail'
 
   def index
     if current_user.has_role? :admin
       @emails = Email.includes(roles: :users).all.order(received_at: :desc)
-      flash[:alert] = "Something went wrong" if @imap.blank?
     else
       @emails = Email.includes(roles: :users).with_role(:employee, current_user)
     end
@@ -28,10 +26,6 @@ class EmailsController < ApplicationController
   end
 
   private
-    def set_imap
-      @imap = MailBox.load_and_fetch_mails if current_user.has_role? :admin
-    end
-
     def get_email
       @email = Email.find(params[:id])
     end

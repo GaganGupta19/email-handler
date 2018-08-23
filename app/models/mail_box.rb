@@ -1,5 +1,6 @@
 class MailBox < ApplicationRecord
   has_many :emails
+  require 'fetch_mail'
 
   def self.load_and_fetch_mails
     self.all.each do |m|
