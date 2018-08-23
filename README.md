@@ -18,7 +18,7 @@ The admin and only assigned employees can reply to assigned emails.
 
 > run `rails s`
 
-> you can also run tests for `FetchEmail` module with `rspec spec/unit/fetch_mail_test.rb `
+> you can also run tests for `FetchEmail` module with `rspec spec/unit/fetch_mail_test.rb` but populate the values for your mailbox in fetch_mail_test.rb before running the tests.
 
 > to access sidekiq go to 'localhost:3000/sidekiq'
 
