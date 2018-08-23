@@ -1,1 +1,1 @@
-EmailHander: bundle exec sidekiq -c 2
+email-handler: bundle exec sidekiq -c 2
