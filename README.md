@@ -22,6 +22,10 @@ The admin and only assigned employees can reply to assigned emails.
 
 > to access sidekiq go to 'localhost:3000/sidekiq'
 
+You can visit [demo](https://morning-reaches-23472.herokuapp.com) but it might not load emails
+ because of remote location of server and security reasons of gmail although you can try it but perform functions
+ mentioned in **IMPORTANT NOTE** section before adding mailbox details. 
+
 **IMPORTANT NOTE**
 
 you have to provide permissions to prevent gmail from blocking the access.
