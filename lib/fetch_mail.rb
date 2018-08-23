@@ -17,7 +17,7 @@ class FetchMail
       @imap.login(@email, @password)
       @imap.select(MAILBOX)
       return true
-    rescue e
+    rescue StandardError => e
       puts "ERROR! #{e}"
       return false
     end
