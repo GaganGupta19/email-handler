@@ -68,8 +68,10 @@ class FetchMail
   end
 
   def destroy_imap
-    return if @imap.disconnected?
+    str = 'logged out successfully'
+    return str if @imap.disconnected?
     @imap.logout
     @imap.disconnect
+    str
   end
 end
