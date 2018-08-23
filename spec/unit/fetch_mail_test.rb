@@ -1,8 +1,9 @@
 require 'fetch_mail'
 
+#NOTE: enter credentials of your mailbox
 describe FetchMail do
   context "if settings are correctly entered" do
-    m = MailBox.create(email: 'horribledevelopers@gmail.com', password: '9811096838', imap_address: 'imap.gmail.com')
+    m = MailBox.create(email: nil, password: nil, imap_address: nil)
     fetch_mail = FetchMail.new(m.email, m.password, m.imap_address, m.id)
 
     it "should initialize correctly" do
