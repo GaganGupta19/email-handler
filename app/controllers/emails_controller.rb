@@ -5,10 +5,10 @@ class EmailsController < ApplicationController
 
   def index
     if current_user.has_role? :admin
-      @emails = Email.all.order(received_at: :desc).preload(:roles)
+      @emails = Email.includes(roles: :users).all.order(received_at: :desc)
       flash[:alert] = "Something went wrong" if @imap.blank?
     else
-      @emails = Email.with_role(:employee, current_user).preload(:roles)
+      @emails = Email.includes(roles: :users).with_role(:employee, current_user)
     end
   end
 
